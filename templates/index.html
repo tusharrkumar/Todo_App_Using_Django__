@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Project</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mdb.css' %}">
+</head>
+<body>
+    <!-- here we inherit the data into html page -->
+<div class="container mt-3">
+    <h2 id="h2" class="text-center alert alert-danger font-weight-bold text-dark">Function Based View ModelForm CRUD Projects</h2>
+    {% block content %}
+
+    {% endblock content %}
+</div>
+
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/mdb.js' %}"></script>
+</body>
+</html>

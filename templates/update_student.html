@@ -1,0 +1,57 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+        font-size: 1.2em;
+
+    }
+    #update {
+        background: linear-gradient(to right, #2193b0, #6dd5ed);
+        padding: 30px;
+        border-radius: 40px;
+        box-shadow: 0 0 20px grey;
+        transition: 0.6s;
+    }
+
+    #update:hover {
+        transform: translate(5px, 3px);
+    }
+
+    input[type="submit"]{
+        border-radius: 25px;
+        margin-left: 180px;
+        transition: 0.6s;
+    }
+
+    input[type="submit"]:hover {
+        transform: translate(5px, 3px);
+    }
+
+    #back_home{
+        border-radius: 25px;
+        margin-left: 50px;
+        transition: 0.6s;
+    }
+
+    #back_home:hover {
+        transform: translate(5px, 3px);
+    }
+</style>
+
+
+<!-- here we updating the details of student  -->
+<div id="update" class="row mt-4">
+    <div class="col-sm-8 offset-2">
+        <h4 class="alert alert-info text-center font-weight-bold text-dark">Update Student Information</h4>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" class="btn btn-warning font-weight-bold text-white" value="Update">
+            <a id="back_home" href="{% url 'add_show' %}" class="btn btn-danger font-weight-bold text-white">Back-To-Home</a>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,113 @@
+
+{% extends 'index.html' %}
+
+{% block content %}
+
+<style>
+    body {
+        background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+        font-size: 1.2em;
+    }
+
+    #update {
+        background: linear-gradient(to right, #2193b0, #6dd5ed);
+        padding: 30px;
+        border-radius: 40px;
+        box-shadow: 0 0 20px grey;
+        transition: 0.6s;
+    }
+
+    h4{
+        border-radius: 20px;
+    }
+
+    #table_data {
+        background: linear-gradient(to right, #aa4b6b, #6b6b83, #3b8d99);
+        padding: 15px;
+        border-radius: 40px;
+        box-shadow: 0 0 20px grey;
+        margin-left: 10px;
+    }
+
+    #add{
+        border-radius: 20px;
+        margin-left: 120px;
+        transition: 0.6s;
+    }
+
+    #add:hover {
+        transform: translate(5px, 3px);
+    }
+
+    #delete {
+        border-radius: 20px;
+        transition: 0.6s;
+    }
+    #delete:hover {
+        transform: translate(3px, 1px);
+    }
+
+    #edit {
+        border-radius: 20px;
+        transition: 0.6s;
+    }
+    #edit:hover {
+        transform: translate(3px, 1px);
+    }
+</style>
+
+
+<!-- Here we creating form and passing the context and if post method is active then we insert the data intothe database -->
+<div class="row">
+    <div class="col-sm-4" id="update">
+        <h4 class="text-center alert-info p-3 font-weight-bold text-dark">Add New Student</h4>
+        <form method="POST">
+            {% csrf_token %}
+            {{stu_form_obj.as_p}}
+            <input id="add" type="submit" value="Add" class="btn btn-danger font-weight-bold text-white">
+        </form>
+    </div>
+
+
+<!-- Here we retrieving the data by passing the context and if data is inserting then we displaying the data in table -->
+    <div class="col-sm" id="table_data">
+        <h4 class="text-center alert-info p-3 font-weight-bold text-dark">Show Student Information</h4>
+        {% if stu %}
+        <table class="table table-hover table-bordered">
+            <thead class="black white-text text-center">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Course</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody class="white white-black text-center">
+                {% for i in stu %}
+                <tr>
+                    <th scope="row">{{i.id}}</th>
+                    <td>{{i.student_name}}</td>
+                    <td>{{i.student_gender}}</td>
+                    <td>{{i.student_address}}</td>
+                    <td>{{i.student_course}}</td>
+                    <td>
+                        <a id="edit" href="{% url 'update_data' i.id %}" class="btn btn-warning font-weight-bold text-dark btn-md">Edit</a>
+
+                        <form action="{% url 'delete_data' i.id %}" method="POST" class="d-inline">
+                            {% csrf_token %}
+                            <input id="delete" type="submit" class="btn btn-danger font-weight-bold text-white btn-md" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <h4 class="text-center alert-warning p-3 mt-3 font-weight-bold">No Record Found</h4>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}
